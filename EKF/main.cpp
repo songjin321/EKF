@@ -10,7 +10,7 @@ int main()
 	{
 		for (size_t j = 1; j < 11; j++)
 			if (i == j)
-				P0(i, j) = 0.1; 
+				P0(i, j) = 0.01; 
 	}
 	Vector x(10);
 	x(1) = 1;

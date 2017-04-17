@@ -36,15 +36,9 @@ void myEkf::makeA()
 	A(1, 5) = 0.0;
 	A(1, 6) = 0.0;
 	A(1, 7) = 0.0;
-	A(1, 8) = (Ts*q2*sth) / th + (Ts*cth*q2*(thx*thx)) / (2 * (th*th)) - (Ts*q2*sth*(thx*thx)) / (th*th*th) -
-			  (Ts*q1*sth*thx) / (2 * th) + (Ts*cth*q3*thx*thy) / (2 * (th*th)) + (Ts*cth*q4*thx*thz) / (2 * (th*th)) -
-			  (Ts*q3*sth*thx*thy) / (th*th*th) - (Ts*q4*sth*thx*thz) / (th*th*th);
-	A(1, 9) = (Ts*q3*sth) / th + (Ts*cth*q3*(thy*thy)) / (2 * (th*th)) - (Ts*q3*sth*(thy*thy)) / (th*th*th) - (Ts*q1*sth*thy) / (2 * th) +
-			  (Ts*cth*q2*thx*thy) / (2 * (th*th)) + (Ts*cth*q4*thy*thz) / (2 * (th*th)) - (Ts*q2*sth*thx*thy) / (th*th*th) -
-			  (Ts*q4*sth*thy*thz) / (th*th*th);
-	A(1, 10) = (Ts*q4*sth) / th + (Ts*cth*q4*(thz*thz)) / (2 * (th*th)) - (Ts*q4*sth*(thz*thz)) / (th*th*th) - (Ts*q1*sth*thz) / (2 * th) +
-			  (Ts*cth*q2*thx*thz) / (2 * (th*th)) + (Ts*cth*q3*thy*thz) / (2 * (th*th)) - (Ts*q2*sth*thx*thz) / (th*th*th) -
-			  (Ts*q3*sth*thy*thz) / (th*th*th);
+	A(1, 8) = (Ts*q2*sth) / th - (Ts*q1*thx*sth) / (2 * th) + (Ts*q2*thx*cos(th / 2)*thx) / (2 * th*th) + (Ts*q3*thx*cos(th / 2)*thy) / (2 * th*th) + (Ts*q4*thx*cos(th / 2)*thz) / (2 * th*th) - (Ts*q2*thx*sth*thx) / (th*th*th) - (Ts*q3*thx*sth*thy) / (th*th*th) - (Ts*q4*thx*sth*thz) / (th*th*th);
+	A(1, 9) = (Ts*q3*sth) / th - (Ts*q1*thy*sth) / (2 * th) + (Ts*q2*thy*cos(th / 2)*thx) / (2 * th*th) + (Ts*q3*thy*cos(th / 2)*thy) / (2 * th*th) + (Ts*q4*thy*cos(th / 2)*thz) / (2 * th*th) - (Ts*q2*thy*sth*thx) / (th*th*th) - (Ts*q3*thy*sth*thy) / (th*th*th) - (Ts*q4*thy*sth*thz) / (th*th*th);
+	A(1, 10) = (Ts*q4*sth) / th - (Ts*q1*thz*sth) / (2 * th) + (Ts*q2*thz*cos(th / 2)*thx) / (2 * th*th) + (Ts*q3*thz*cos(th / 2)*thy) / (2 * th*th) + (Ts*q4*thz*cos(th / 2)*thz) / (2 * th*th) - (Ts*q2*thz*sth*thx) / (th*th*th) - (Ts*q3*thz*sth*thy) / (th*th*th) - (Ts*q4*thz*sth*thz) / (th*th*th);
 
 	A(2, 1) = -sin_th_x;
 	A(2, 2) = cth;
@@ -53,15 +47,9 @@ void myEkf::makeA()
 	A(2, 5) = 0.0;
 	A(2, 6) = 0.0;
 	A(2, 7) = 0.0;
-	A(2, 8) = (Ts*q1*sth*(thx*thx)) / (th*th*th) - (Ts*cth*q1*(thx*thx)) / (2 * (th*th)) - (Ts*q1*sth) / th - (Ts*q2*sth*thx) / (2 * th) +
-			  (Ts*cth*q4*thx*thy) / (2 * (th*th)) - (Ts*cth*q3*thx*thz) / (2 * (th*th)) - (Ts*q4*sth*thx*thy) / (th*th*th) +
-			  (Ts*q3*sth*thx*thz) / (th*th*th);
-	A(2, 9) = (Ts*q4*sth) / th + (Ts*cth*q4*(thy*thy)) / (2 * (th*th)) - (Ts*q4*sth*(thy*thy)) / (th*th*th) - (Ts*q2*sth*thy) / (2 * th) -
-			  (Ts*cth*q1*thx*thy) / (2 * (th*th)) - (Ts*cth*q3*thy*thz) / (2 * (th*th)) + (Ts*q1*sth*thx*thy) / (th*th*th) +
-			  (Ts*q3*sth*thy*thz) / (th*th*th);
-	A(2, 10) = (Ts*q3*sth*(thz*thz)) / (th*th*th) - (Ts*cth*q3*(thz*thz)) / (2 * (th*th)) - (Ts*q3*sth) / th - (Ts*q2*sth*thz) / (2 * th) -
-			  (Ts*cth*q1*thx*thz) / (2 * (th*th)) + (Ts*cth*q4*thy*thz) / (2 * (th*th)) + (Ts*q1*sth*thx*thz) / (th*th*th) -
-			  (Ts*q4*sth*thy*thz) / (th*th*th);
+	A(2, 8) = (Ts*q4*thx*cos(th / 2)*thy) / (2 * th*th) - (Ts*q2*thx*sth) / (2 * th) - (Ts*q1*thx*cos(th / 2)*thx) / (2 * th*th) - (Ts*q1*sth) / th - (Ts*q3*thx*cos(th / 2)*thz) / (2 * th*th) + (Ts*q1*thx*sth*thx) / (th*th*th) - (Ts*q4*thx*sth*thy) / (th*th*th) + (Ts*q3*thx*sth*thz) / (th*th*th);
+	A(2, 9) = (Ts*q4*sth) / th - (Ts*q2*thy*sth) / (2 * th) - (Ts*q1*thy*cos(th / 2)*thx) / (2 * th*th) + (Ts*q4*thy*cos(th / 2)*thy) / (2 * th*th) - (Ts*q3*thy*cos(th / 2)*thz) / (2 * th*th) + (Ts*q1*thy*sth*thx) / (th*th*th) - (Ts*q4*thy*sth*thy) / (th*th*th) + (Ts*q3*thy*sth*thz) / (th*th*th);
+	A(2, 10) = (Ts*q4*thz*cos(th / 2)*thy) / (2 * th*th) - (Ts*q2*thz*sth) / (2 * th) - (Ts*q1*thz*cos(th / 2)*thx) / (2 * th*th) - (Ts*q3*sth) / th - (Ts*q3*thz*cos(th / 2)*thz) / (2 * th*th) + (Ts*q1*thz*sth*thx) / (th*th*th) - (Ts*q4*thz*sth*thy) / (th*th*th) + (Ts*q3*thz*sth*thz) / (th*th*th);
 
 	A(3, 1) = -sin_th_y;
 	A(3, 2) = sin_th_z;
@@ -70,15 +58,9 @@ void myEkf::makeA()
 	A(3, 5) = 0.0;
 	A(3, 6) = 0.0;
 	A(3, 7) = 0.0;
-	A(3, 8) = (Ts*q4*sth*(thx*thx)) / (th*th*th) - (Ts*cth*q4*(thx*thx)) / (2 * (th*th)) - (Ts*q4*sth) / th - (Ts*q3*sth*thx) / (2 * th) -
-			  (Ts*cth*q1*thx*thy) / (2 * (th*th)) + (Ts*cth*q2*thx*thz) / (2 * (th*th)) + (Ts*q1*sth*thx*thy) / (th*th*th) -
-			  (Ts*q2*sth*thx*thz) / (th*th*th);
-	A(3, 9) = (Ts*q1*sth*(thy*thy)) / (th*th*th) - (Ts*cth*q1*(thy*thy)) / (2 * (th*th)) - (Ts*q1*sth) / th - (Ts*q3*sth*thy) / (2 * th) -
-			  (Ts*cth*q4*thx*thy) / (2 * (th*th)) + (Ts*cth*q2*thy*thz) / (2 * (th*th)) + (Ts*q4*sth*thx*thy) / (th*th*th) -
-			  (Ts*q2*sth*thy*thz) / (th*th*th);
-	A(3, 10) = (Ts*q2*sth) / th + (Ts*cth*q2*(thz*thz)) / (2 * (th*th)) - (Ts*q2*sth*(thz*thz)) / (th*th*th) - (Ts*q3*sth*thz) / (2 * th) -
-			  (Ts*cth*q4*thx*thz) / (2 * (th*th)) - (Ts*cth*q1*thy*thz) / (2 * (th*th)) + (Ts*q4*sth*thx*thz) / (th*th*th) +
-			  (Ts*q1*sth*thy*thz) / (th*th*th);
+	A(3, 8) = (Ts*q2*thx*cos(th / 2)*thz) / (2 * th*th) - (Ts*q3*thx*sth) / (2 * th) - (Ts*q4*thx*cos(th / 2)*thx) / (2 * th*th) - (Ts*q1*thx*cos(th / 2)*thy) / (2 * th*th) - (Ts*q4*sth) / th + (Ts*q4*thx*sth*thx) / (th*th*th) + (Ts*q1*thx*sth*thy) / (th*th*th) - (Ts*q2*thx*sth*thz) / (th*th*th);  
+	A(3, 9) = (Ts*q2*thy*cos(th / 2)*thz) / (2 * th*th) - (Ts*q3*thy*sth) / (2 * th) - (Ts*q4*thy*cos(th / 2)*thx) / (2 * th*th) - (Ts*q1*thy*cos(th / 2)*thy) / (2 * th*th) - (Ts*q1*sth) / th + (Ts*q4*thy*sth*thx) / (th*th*th) + (Ts*q1*thy*sth*thy) / (th*th*th) - (Ts*q2*thy*sth*thz) / (th*th*th);
+	A(3, 10) = (Ts*q2*sth) / th - (Ts*q3*thz*sth) / (2 * th) - (Ts*q4*thz*cos(th / 2)*thx) / (2 * th*th) - (Ts*q1*thz*cos(th / 2)*thy) / (2 * th*th) + (Ts*q2*thz*cos(th / 2)*thz) / (2 * th*th) + (Ts*q4*thz*sth*thx) / (th*th*th) + (Ts*q1*thz*sth*thy) / (th*th*th) - (Ts*q2*thz*sth*thz) / (th*th*th);
 
 	A(4, 1) = -sin_th_z;
 	A(4, 2) = -sin_th_y;
@@ -87,22 +69,14 @@ void myEkf::makeA()
 	A(4, 5) = 0.0;
 	A(4, 6) = 0.0;
 	A(4, 7) = 0.0;
-	A(4, 8) = (Ts*q3*sth) / th + (Ts*cth*q3*(thx*thx)) / (2 * (th*th)) - (Ts*q3*sth*(thx*thx)) / (th*th*th) - (Ts*q4*sth*thx) / (2 * th) -
-			  (Ts*cth*q2*thx*thy) / (2 * (th*th)) - (Ts*cth*q1*thx*thz) / (2 * (th*th)) + (Ts*q2*sth*thx*thy) / (th*th*th) +
-			  (Ts*q1*sth*thx*thz) / (th*th*th);
-	A(4, 9) = (Ts*q2*sth*(thy*thy)) / (th*th*th) - (Ts*cth*q2*(thy*thy)) / (2 * (th*th)) - (Ts*q2*sth) / th - (Ts*q4*sth*thy) / (2 * th) +
-			  (Ts*cth*q3*thx*thy) / (2 * (th*th)) - (Ts*cth*q1*thy*thz) / (2 * (th*th)) - (Ts*q3*sth*thx*thy) / (th*th*th) +
-			  (Ts*q1*sth*thy*thz) / (th*th*th);
-	A(4, 10) = (Ts*q1*sth*(thz*thz)) / (th*th*th) - (Ts*cth*q1*(thz*thz)) / (2 * (th*th)) - (Ts*q1*sth) / th - (Ts*q4*sth*thz) / (2 * th) +
-			  (Ts*cth*q3*thx*thz) / (2 * (th*th)) - (Ts*cth*q2*thy*thz) / (2 * (th*th)) - (Ts*q3*sth*thx*thz) / (th*th*th) +
-			  (Ts*q2*sth*thy*thz) / (th*th*th);
+	A(4, 8) = (Ts*q3*sth) / th - (Ts*q4*thx*sth) / (2 * th) + (Ts*q3*thx*cos(th / 2)*thx) / (2 * th*th) - (Ts*q2*thx*cos(th / 2)*thy) / (2 * th*th) - (Ts*q1*thx*cos(th / 2)*thz) / (2 * th*th) - (Ts*q3*thx*sth*thx) / (th*th*th) + (Ts*q2*thx*sth*thy) / (th*th*th) + (Ts*q1*thx*sth*thz) / (th*th*th);
+	A(4, 9) = (Ts*q3*thy*cos(th / 2)*thx) / (2 * th*th) - (Ts*q4*thy*sth) / (2 * th) - (Ts*q2*sth) / th - (Ts*q2*thy*cos(th / 2)*thy) / (2 * th*th) - (Ts*q1*thy*cos(th / 2)*thz) / (2 * th*th) - (Ts*q3*thy*sth*thx) / (th*th*th) + (Ts*q2*thy*sth*thy) / (th*th*th) + (Ts*q1*thy*sth*thz) / (th*th*th);
+	A(4, 10) = (Ts*q3*thz*cos(th / 2)*thx) / (2 * th*th) - (Ts*q4*thz*sth) / (2 * th) - (Ts*q1*sth) / th - (Ts*q2*thz*cos(th / 2)*thy) / (2 * th*th) - (Ts*q1*thz*cos(th / 2)*thz) / (2 * th*th) - (Ts*q3*thz*sth*thx) / (th*th*th) + (Ts*q2*thz*sth*thy) / (th*th*th) + (Ts*q1*thz*sth*thz) / (th*th*th);
 
 	for (size_t i = 5; i < 11; i++)
 	{
 		for (size_t j = 1; j < 11; j++)
 		{
-			if (i <= 4 && j <= 4)
-				break;
 			if (i == j)
 				A(i, j) = 1.0;
 			else
@@ -282,6 +256,11 @@ void myEkf::makeProcess()
 	x_(8) = x(8);
 	x_(9) = x(9);
 	x_(10) = x(10);
+	double normq = sqrt(x_(1)*x_(1) + x_(2)*x_(2) + x_(3)*x_(3) + x_(4)*x_(4));
+	x_(1) = x_(1) / normq;
+	x_(2) = x_(2) / normq;
+	x_(3) = x_(3) / normq;
+	x_(4) = x_(4) / normq;
 	x.swap(x_);
 }
 
