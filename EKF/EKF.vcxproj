@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>F:\MyLib\kalman;$(IncludePath)</IncludePath>
+    <IncludePath>F:\MyLib\eigen-eigen-67e894c6cd8f;F:\MyLib\kalman;$(IncludePath)</IncludePath>
     <LibraryPath>F:\MyLib\kalman\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

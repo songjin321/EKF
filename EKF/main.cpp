@@ -5,20 +5,14 @@ int main()
 {
 	myEkf filter;
 
-	Matrix P0(10,10);
+	Matrix<double,10,10> P0;
 	for (size_t i = 1; i < 11; i++)
 	{
 		for (size_t j = 1; j < 11; j++)
 			if (i == j)
 				P0(i, j) = 0.01; 
 	}
-	Vector x(10);
-	x(1) = 1;
-	for (size_t i = 2; i < 11; i++)
-	{
-		x(i) = 0;
-	}
-	filter.init(x, P0);
+
 	std::ifstream in("Measurement2.txt");
 	std::string Measure;
 	std::string::size_type sz;     // alias of size_t

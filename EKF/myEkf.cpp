@@ -1,17 +1,7 @@
 #include "myEkf.h"
-
+#include <Eigen/Dense>
 myEkf::myEkf()
 {
-	setDim(10, 3, 9, 6, 6);
-	Ts = 0.00025;
-	g = 9.81; 
-	hx = 0.26;
-	hz = 0.37;
-	sigma_a = 0.005;
-	sigma_g = 0.4 / 180 * PI;
-	sigma_h = 0.001;
-	b_sigma_g = 0.01 / 180 * PI;
-	b_sigma_h = 0.001;
 }
 
 void myEkf::makeA()
