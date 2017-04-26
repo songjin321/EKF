@@ -5,21 +5,22 @@ int main()
 {
 	myEkf filter;
 
-	Matrix<double,10,10> P0;
-	for (size_t i = 1; i < 11; i++)
-	{
-		for (size_t j = 1; j < 11; j++)
-			if (i == j)
-				P0(i, j) = 0.01; 
-	}
-
-	std::ifstream in("Measurement2.txt");
+	VectorXd P0Vector(10);
+	P0Vector << 0.0, 0.0, 0.0, 0.0,1e-4,1e-4,1e-4,3e-8,3e-8,3e-8;
+	Matrix<double,10,10> P0(P0Vector.asDiagonal());
+	Matrix<double, 10, 1> x0 = Matrix<double, 10, 1>::Zero();
+	x0(0) = 1;
+	filter.initialize(x0, P0);
+	std::ifstream in("Measurement.txt");
+	std::ofstream out("out.txt");
 	std::string Measure;
 	std::string::size_type sz;     // alias of size_t
-	Vector z(6);
-	Vector u(3);
+	Matrix<double,6,1> z;
+	Vector3d u;
 	while (std::getline(in, Measure))
 	{
+		z(0) = std::stod(Measure, &sz);
+		Measure = Measure.substr(sz);
 		z(1) = std::stod(Measure, &sz);
 		Measure = Measure.substr(sz);
 		z(2) = std::stod(Measure, &sz);
@@ -30,14 +31,13 @@ int main()
 		Measure = Measure.substr(sz);
 		z(5) = std::stod(Measure, &sz);
 		Measure = Measure.substr(sz);
-		z(6) = std::stod(Measure, &sz);
+		u(0) = std::stod(Measure, &sz);
 		Measure = Measure.substr(sz);
 		u(1) = std::stod(Measure, &sz);
 		Measure = Measure.substr(sz);
 		u(2) = std::stod(Measure, &sz);
-		Measure = Measure.substr(sz);
-		u(3) = std::stod(Measure, &sz);
 		filter.step(u, z);
-		std::cout << filter.getX() << std::endl;
+		out << filter.getX().transpose() << std::endl;
 	}
+	std::cout << "OK!"<<std::endl;
 }
