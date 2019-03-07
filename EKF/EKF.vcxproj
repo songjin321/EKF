@@ -22,7 +22,7 @@
     <ProjectGuid>{CF5EAB8F-BAB0-4753-8D5A-42A581C22718}</ProjectGuid>
     <RootNamespace>EKF</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>EKF_Alt</ProjectName>
+    <ProjectName>EKF_Alti</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -119,10 +119,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alignment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myEkf.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Alignment.h" />
     <ClInclude Include="myEkf.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

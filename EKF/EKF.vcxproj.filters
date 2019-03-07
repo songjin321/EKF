@@ -21,9 +21,15 @@
     <ClCompile Include="myEkf.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Alignment.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myEkf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Alignment.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -290,7 +290,6 @@ void myEkf::timeUpdate(const Vector3d &_u)
 
 
 	makeA();
-//	std::cout << A << std::endl;
 	makeW();
 	makeQ();
 	makeProcess();
@@ -311,20 +310,10 @@ void myEkf::measureUpdate(const Matrix<double, 6, 1>& _z)
 
 	Matrix<double, 10, 6> K = P * H.transpose() * (H*P*H.transpose() + R).inverse();
 	x = x + K * (z - h);
-//	std::cout << K << std::endl;
-//	std::cout << z - h << std::endl;
 	Vector4d q(x(0), x(1), x(2), x(3));
 	x(0) = x(0) / q.norm();
 	x(1) = x(1) / q.norm();
     x(2) = x(2) / q.norm();
 	x(3) = x(3) / q.norm();
-	/*
-	double normq = sqrt(x(0)*x(0) + x(1)*x(1) + x(2)*x(2) + x(3)*x(3));
-	x(0) = x(0) / normq;
-	x(1) = x(1) / normq;
-	x(2) = x(2) / normq;
-	x(3) = x(3) / normq;
-	*/
-	//x.normalize();
 	P = (MatrixXd::Identity(10, 10) - K * H)*P;
 }

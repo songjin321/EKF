@@ -1,9 +1,6 @@
 #pragma once
-#include <kalman\ekfilter.hpp>
 #include <Eigen\Dense>
 #define PI 3.14159265359;
-#define Nsta 10;
-#define Mobs  6;
 using namespace Eigen;
 class myEkf{
 public:
