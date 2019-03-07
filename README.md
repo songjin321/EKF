@@ -20,11 +20,9 @@ Arduino主函数，读取传感器数据，调用Alignment初始化，然后调�
 
 # 原理说明
 
-参见本人毕业设计论文3.1小结
+参见本人[毕业设计论文](宋瑾-毕业论文-最终.pdf)3.1小结
 
 # 演示视频
 
-```
 <a href="https://www.youtube.com/watch?v=5l8blxg7x_w"> <img src="https://img.youtube.com/vi/5l8blxg7x_w/maxresdefault.jpg" alt="video" width="600"/>
 </a>
-```
